@@ -5,6 +5,8 @@ from PIL import Image
 import cv2
 from torchvision import transforms
 from typing import Tuple
+import sys
+import os
 
 from .detector import detect_signature
 from .model import SignatureEmbeddingModel

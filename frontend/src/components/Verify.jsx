@@ -65,19 +65,6 @@ function Verify() {
         </div>
       </div>
 
-      <div className="threshold-control">
-        <label>Порог схожести: <strong>{threshold}</strong></label>
-        <input
-          type="range"
-          min="0"
-          max="1"
-          step="0.01"
-          value={threshold}
-          onChange={(e) => setThreshold(parseFloat(e.target.value))}
-        />
-        <small>Чем выше порог, тем строже сравнение</small>
-      </div>
-
       <button onClick={handleSubmit} disabled={loading} className="submit-btn">
         {loading ? 'Сравнение...' : 'Сравнить'}
       </button>

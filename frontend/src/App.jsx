@@ -16,16 +16,10 @@ function App() {
         >
            Сравнить две подписи
         </button>
-        <button
-          className={activeTab === 'identify' ? 'active' : ''}
-          onClick={() => setActiveTab('identify')}
-        >
-           Узнать владельца
-        </button>
+
       </div>
       <div className="tab-content">
         {activeTab === 'verify' && <Verify />}
-        {activeTab === 'identify' && <Identify />}
       </div>
     </div>
   );
