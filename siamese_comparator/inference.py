@@ -8,8 +8,9 @@ from .model import SiameseNetwork
 
 class SignatureComparator:
     def __init__(self, model_path=None, threshold=0.7):
-        self.device = torch.device("mps" if torch.backends.mps.is_available() else
-                                   "cuda" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device(
+            "mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu"
+        )
         self.threshold = threshold
 
         if model_path is None:
@@ -20,11 +21,13 @@ class SignatureComparator:
         self.model.load_state_dict(torch.load(model_path, map_location=self.device))
         self.model.eval()
 
-        self.transform = transforms.Compose([
-            transforms.Resize((224, 224)),
-            transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-        ])
+        self.transform = transforms.Compose(
+            [
+                transforms.Resize((224, 224)),
+                transforms.ToTensor(),
+                transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
+            ]
+        )
 
     def preprocess(self, img_path):
         image = Image.open(img_path).convert("RGB")

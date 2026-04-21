@@ -14,18 +14,17 @@ class CEDARDataset(Dataset):
     def __init__(self, root_dir, transform=None):
         self.root_dir = root_dir
         self.transform = transform
-        self.org_dir = os.path.join(root_dir, 'full_org')
-        self.forg_dir = os.path.join(root_dir, 'full_forg')
+        self.org_dir = os.path.join(root_dir, "full_org")
+        self.forg_dir = os.path.join(root_dir, "full_forg")
 
         if not os.path.exists(self.org_dir):
             raise FileNotFoundError(f"Папка не найдена: {self.org_dir}")
 
-
         all_files = os.listdir(self.org_dir)
         person_ids = []
         for f in all_files:
-            if f.startswith('original_') and f.endswith('.png'):
-                parts = f.split('_')
+            if f.startswith("original_") and f.endswith(".png"):
+                parts = f.split("_")
                 if len(parts) >= 2:
                     person_ids.append(parts[1])
 
@@ -74,8 +73,9 @@ class ContrastiveLoss(torch.nn.Module):
 
     def forward(self, out1, out2, label):
         dist = F.pairwise_distance(out1, out2)
-        loss = torch.mean((1 - label) * torch.pow(dist, 2) +
-                          (label) * torch.pow(torch.clamp(self.margin - dist, min=0.0), 2))
+        loss = torch.mean(
+            (1 - label) * torch.pow(dist, 2) + (label) * torch.pow(torch.clamp(self.margin - dist, min=0.0), 2)
+        )
         return loss
 
 
@@ -87,11 +87,13 @@ def main():
     else:
         device = torch.device("cpu")
 
-    transform = transforms.Compose([
-        transforms.Resize((224, 224)),
-        transforms.ToTensor(),
-        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-    ])
+    transform = transforms.Compose(
+        [
+            transforms.Resize((224, 224)),
+            transforms.ToTensor(),
+            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
+        ]
+    )
 
     dataset_path = "/Users/darya/Downloads/signatures"
     dataset = CEDARDataset(dataset_path, transform=transform)

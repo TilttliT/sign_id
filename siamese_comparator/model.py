@@ -1,4 +1,3 @@
-import torch
 import torch.nn as nn
 from torchvision import models
 
@@ -10,11 +9,7 @@ class SiameseNetwork(nn.Module):
 
         self.backbone = nn.Sequential(*list(resnet.children())[:-1])
 
-        self.fc = nn.Sequential(
-            nn.Linear(512, 256),
-            nn.ReLU(inplace=True),
-            nn.Linear(256, 128)
-        )
+        self.fc = nn.Sequential(nn.Linear(512, 256), nn.ReLU(inplace=True), nn.Linear(256, 128))
 
     def forward_once(self, x):
         output = self.backbone(x)
