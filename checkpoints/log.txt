@@ -1,0 +1,5 @@
+Threshold: 0.9474 | FPR: 0.0473 (target: 0.05) | TPR: 0.7818 | Acc: 0.8673 | F1: 0.8549
+Epoch  1 | Train Loss: 0.0000 | Val Acc: 0.8673 | F1: 0.8549 | FPR: 0.0473 | TPR: 0.7818
+Checkpoint saved to ./checkpoints/signature_model.pth
+  -> New best model saved with TPR=0.7818 at FPR=0.0473
+Training finished. Best threshold: 0.9474, Best TPR: 0.7818
